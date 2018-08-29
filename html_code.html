@@ -1,0 +1,47 @@
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
+<div class = "slide" id = "captcha">
+  <p> <br> <p>
+    <p>
+
+    <form target="_blank" id="verify_form" method="post">
+    <center>
+      <div class="g-recaptcha" data-sitekey="[YOUR RECAPTCHA SITE KEY]"></div>
+    <p>
+    <input type="submit" name="submit" value="Begin HIT"><br>
+    </center>
+    </form>
+    <div class="loading" style="display:none"><p>Loading HIT...</div> 
+    <div class="captcha_error" style="display:none"><p><font color="FF0000">ERROR: You must pass the reCaptcha authentication before proceeding.</font></div> 
+  </div>
+
+<script>
+
+// Attach a submit handler to the form
+$( "#verify_form" ).submit(function( event ) {
+ 
+  // Stop form from submitting normally
+  event.preventDefault();
+
+  $(".captcha_error").hide()
+
+  $(".loading").show();
+
+  function looseJsonParse(obj){
+    return Function('"use strict";return (' + obj + ')')();
+  }
+ 
+  $.ajax({
+  type: "POST",
+  url: "[THE LOCATION OF YOUR verify.php FILE]",
+  data : {"captcha" : grecaptcha.getResponse()},
+  success: function(data) {
+    console.log(looseJsonParse(data));
+    },
+  error: function() { 
+    console.log("Error: form not sent"); 
+    },  
+  });
+});
+
+</script>  
