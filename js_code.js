@@ -1,3 +1,3 @@
- slides.captcha = slide({
-  	name : "captcha",
+ slides.auth = slide({
+  	name : "auth",
   });

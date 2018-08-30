@@ -1,6 +1,10 @@
-SETTING UP RECAPTCHA WITH SUBMITERATOR
+AUTHENTERATOR - AUTHENTICATION TOOLS FOR SUBMITERATOR
 
-Brandon Waldon (bwaldon@stanford.edu - 8/29/2018)
+Brandon Waldon (bwaldon@stanford.edu - 8/30/2018)
+
+This tool allows you to bar participants who fail a reCAPTCHA from taking your submiterator experiment. In principle, one could also extend this code to make new authentication criteria (e.g. solve a math problem before continuing to the experiment). 
+
+SETTING UP AUTHENTERATOR ON A LIVE SUBMITERATOR EXPERIMENT: 
 
 - Step 1: get reCAPTCHA access through Google 
 
@@ -32,7 +36,17 @@ Nothing about this code needs to be changed. Just make sure that it's located wh
 
 - Step 5: change the 'exp.structure' variable in index.js 
 
-Add "captcha" as the first element of this array. Now, users can only go on to other parts of your experiment once Google has validated their reCAPTCHA data. That is, anyone who fails the reCAPTCHA is barred from participating in your experiment in the first place. Pretty neat! Hopefully less money wasted on useless bot data.
+Add “auth” as the first element of this array. Now, users can only go on to other parts of your experiment once Google has validated their reCAPTCHA data. That is, anyone who fails the reCAPTCHA is barred from participating in your experiment in the first place. Pretty neat! Hopefully less money wasted on useless bot data.
+
+USING THE INCLUDED DEMO:
+
+- Step 1: cd into the authenterator/demo folder, then run the following command in the terminal: 
+
+python -m SimpleHTTPServer 8000
+
+- Step 2: type the following url into your browser: 
+
+http://localhost:8000/
  
 ERRATA:
 

@@ -1,0 +1,88 @@
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
+<html>
+
+<head>
+    <title>Authenterator demo</title>
+
+    <!--JS-->
+
+    <!-- external general utilities -->
+    <script src="resources/shared/js/jquery-1.11.1.min.js"></script>
+    <script src="resources/shared/full-projects/jquery-ui/jquery-ui.min.js"></script>
+    <script src="resources/shared/js/underscore-min.js"></script>
+
+    <!-- cocolab experiment logic -->
+    <script src="resources/shared/js/exp-V2.js"></script>
+    <script src="resources/shared/js/stream-V2.js"></script>
+
+    <!-- cocolab general utilities -->
+    <script src="resources/shared/js/mmturkey.js "></script>
+    <script src="resources/shared/js/browserCheck.js"></script>
+    <script src="resources/shared/js/utils.js"></script>
+    <link href="resources/shared/full-projects/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+    <link href="resources/shared/css/cocolab-style.css" rel="stylesheet" type="text/css"/>
+    <link href="resources/css/local-style.css" rel="stylesheet" type="text/css"/>
+
+    <!-- experiment file -->
+    <script src="resources/index.js"></script>
+
+</head>
+
+<body onload="init();">
+  <noscript>This task requires JavaScript.</noscript>
+
+<div class = "slide" id = "auth">
+  <p> <br> <p>
+    <p>
+
+    <form target="_blank" id="verify_form" method="post">
+    <center>
+      <!-- SITE KEY FOR DEMO PURPOSES ONLY -->
+      <div class="g-recaptcha" data-sitekey="6LfaZG0UAAAAALO-Pg-OV-LyB2gxDuxO8_Nhy8ME"></div>
+    <p>
+    <input type="submit" name="submit" value="Begin HIT"><br>
+    </center>
+    </form>
+    <div class="loading" style="display:none"><p>Loading HIT...</div> 
+    <div class="captcha_error" style="display:none"><p><font color="FF0000">ERROR: You must pass the reCaptcha authentication before proceeding.</font></div> 
+  </div>
+
+<script>
+
+// Attach a submit handler to the form
+$( "#verify_form" ).submit(function( event ) {
+ 
+  // Stop form from submitting normally
+  event.preventDefault();
+
+  $(".captcha_error").hide()
+
+  $(".loading").show();
+
+  function looseJsonParse(obj){
+    return Function('"use strict";return (' + obj + ')')();
+  }
+ 
+  $.ajax({
+  type: "POST",
+  // URL FOR DEMO PURPOSES ONLY.
+  url: "https://stanford.edu/~bwaldon/cgi-bin/demo_verify.php/",
+  data : {"captcha" : grecaptcha.getResponse()},
+  success: function(data) {
+    console.log(looseJsonParse(data));
+    },
+  error: function() { 
+    console.log("Error: form not sent"); 
+    },  
+  });
+});
+
+</script>  
+
+<div class = "slide" id = "success">
+    <p  class="big">Successfully authenticated.</p>
+</div>
+
+</body>
+</html>
