@@ -32,10 +32,14 @@ $report_data["timeStamp"] = time();
 
 $report = json_encode($report_data);
 
-$myfile = fopen("reCaptcha_data.txt", "a") or die("Unable to open file!");
+// Important: be sure to first create an empty folder titled 'data' in the directory where your 'verify.php' file is located - and to restrict permissions on that folder such that it is inaccessible to general web traffic. 
+
+$myfile = fopen("data/reCaptcha_data.txt", "a") or die("Unable to open file!");
 $txt = $report.",";
 fwrite($myfile, $txt);
 fclose($myfile);
+
+
 
 ?>
 

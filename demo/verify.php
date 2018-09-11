@@ -33,7 +33,7 @@ $report_data["timeStamp"] = time();
 
 $report = json_encode($report_data);
 
-$myfile = fopen("reCaptcha_data.txt", "a") or die("Unable to open file!");
+$myfile = fopen("data/reCaptcha_data.txt", "a") or die("Unable to open file!");
 $txt = $report.",";
 fwrite($myfile, $txt);
 fclose($myfile);
