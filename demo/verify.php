@@ -1,6 +1,6 @@
 <?php
 // NOTE: the actual verify.php file for this demo is hosted on Brandon Waldon's StanfordAFS account.
-header("Access-Control-Allow-Origin: [YOUR GITHUB PAGES URL HERE]"); 
+header("Access-Control-Allow-Origin: *"); 
 $secretKey="[INSERT SECRET KEY HERE]"; 
 $response=$_POST["captcha"];
 
